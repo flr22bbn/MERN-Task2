@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Task 3</title>
+    <script>
+        function multiply() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            const multiplicationResult = num1 * num2;
+
+            document.getElementById("result").innerHTML = `The Result Is: <br> ${multiplicationResult}`;
+        }
+
+        function divide() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            if (num2 === 0) {
+                document.getElementById("result").innerHTML = "Division by zero error";
+                return;
+            }
+
+            const divisionResult = num1 / num2;
+
+            document.getElementById("result").innerHTML = `The Result Is: <br> ${divisionResult}`;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Task 3</h1>
+    <label for="num1">1st Number: </label>
+    <input type="text" id="num1">
+    <br>
+    <label for="num2">2nd Number: </label>
+    <input type="text" id="num2">
+    <br>
+    <button type="button" onclick="multiply()">Multiply</button>
+    <button type="button" onclick="divide()">Divide</button>
+    <p id="result"></p>
+</body>
+
+</html>

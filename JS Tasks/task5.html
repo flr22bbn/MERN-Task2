@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Task 5</title>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        .error-input {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task 5</h1>
+    <form id="contactForm">
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Name">
+        <span class="error-message" id="Name-error"></span><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error-message" id="email-error"></span><br><br>
+
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website">
+        <span class="error-message" id="website-error"></span><br><br>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+        <span class="error-message" id="message-error"></span><br><br>
+
+        <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            document.getElementById('Name-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('website-error').textContent = '';
+            document.getElementById('message-error').textContent = '';
+
+            document.getElementById('Name').classList.remove('error-input');
+            document.getElementById('email').classList.remove('error-input');
+            document.getElementById('website').classList.remove('error-input');
+            document.getElementById('message').classList.remove('error-input');
+
+            const Name = document.getElementById('Name').value;
+            const email = document.getElementById('email').value;
+            const website = document.getElementById('website').value;
+            const message = document.getElementById('message').value;
+
+            const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+            if (!Name) {
+                document.getElementById('Name-error').textContent = 'This field is required';
+                document.getElementById('Name').classList.add('error-input');
+            }
+
+            if (!email) {
+                document.getElementById('email-error').textContent = 'A valid email address is required';
+                document.getElementById('email').classList.add('error-input');
+            } else if (!email.match(emailRegex)) {
+                document.getElementById('email-error').textContent = 'A valid email address is required';
+                document.getElementById('email').classList.add('error-input');
+            }
+
+            if (!website) {
+                document.getElementById('website-error').textContent = 'A valid url is required';
+                document.getElementById('website').classList.add('error-input');
+            } else if (!website.startsWith('http://') && !website.startsWith('https://')) {
+                document.getElementById('website-error').textContent = 'A valid url is required';
+                document.getElementById('website').classList.add('error-input');
+            }
+
+            if (!message) {
+                document.getElementById('message-error').textContent = 'This field is required';
+                document.getElementById('message').classList.add('error-input');
+            }
+        }
+    </script>
+</body>
+
+</html>

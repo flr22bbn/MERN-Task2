@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 8</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 2px;
+
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 95%;
+            padding: 4px;
+            margin: 1px 0;
+        }
+
+        .error-message {
+            color: red;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+
+        table {
+            border: 0px;
+            border-collapse: collapse;
+            width: 50%;
+            background: linear-gradient(135deg, rgb(255, 245, 129), rgb(255, 107, 198));
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const firstName = document.getElementsByName("first_name")[0].value;
+            const lastName = document.getElementsByName("last_name")[0].value;
+            const email = document.getElementsByName("email")[0].value;
+            const password = document.getElementsByName("password")[0].value;
+            const reenterPassword = document.getElementsByName("reenter_password")[0].value;
+
+            document.querySelectorAll('.error-message').forEach((element) => {
+                element.remove();
+            });
+
+            let hasError = false;
+
+            if (firstName.trim() === '') {
+                displayError('first_name', 'POOR');
+                hasError = true;
+            }
+
+            if (lastName.trim() === '') {
+                displayError('last_name', 'POOR');
+                hasError = true;
+            }
+
+            if (!isValidEmail(email)) {
+                displayError('email', 'POOR');
+                hasError = true;
+            }
+
+            if (password.trim() === '') {
+                displayError('password', 'POOR');
+                hasError = true;
+            }
+
+            if (reenterPassword.trim() === '' || reenterPassword !== password) {
+                displayError('reenter_password', 'POOR OR MISMATCH');
+                hasError = true;
+            }
+
+            if (hasError) {
+                return false;
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function displayError(fieldName, message) {
+            const inputElement = document.getElementsByName(fieldName)[0];
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            inputElement.parentNode.appendChild(errorDiv);
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <td colspan="2">
+                <h2 style="color: blue;" class="center-text">Registration Form</h2>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>First Name:</b></td>
+            <td style="padding-right: 80px;"><input type="text" name="first_name"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Last Name:</b></td>
+            <td style="padding-right: 80px;"><input type="text" name="last_name"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Email:</b></td>
+            <td style="padding-right: 80px;"><input type="email" name="email"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Password:</b></td>
+            <td style="padding-right: 80px;"><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Re-enter Password:</b></td>
+            <td style="padding-right: 80px;"><input type="password" name="reenter_password"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;" rowspan="2"><b>Gender:</b></td>
+            <td style="padding-right: 80px;"><input type="radio" name="gender" value="Male">Male</td>
+        </tr>
+        <tr>
+            <td style="padding-right: 80px;"><input type="radio" name="gender" value="Female">Female</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Age:</b></td>
+            <td style="padding-right: 80px;"><input type="number" name="age"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Phone Number:</b></td>
+            <td style="padding-right: 80px;"><input type="tel" name="phone_number"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Address:</b></td>
+            <td style="padding-right: 80px;"><textarea name="address" rows="1" cols="20"></textarea></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>State:</b></td>
+            <td style="padding-right: 80px;"><input type="text" name="state"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Country (Dropdown):</b></td>
+            <td style="padding-right: 80px;">
+                <select name="country">
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                    <option value="India">India</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;"><b>Languages Known:</b></td>
+            <td style="padding-right: 80px;">
+                <input type="checkbox" name="languages[]" value="English">English
+                <input type="checkbox" name="languages[]" value="Kannada">Kannada
+                <input type="checkbox" name="languages[]" value="Hindi">Hindi
+                <input type="checkbox" name="languages[]" value="Telugu">Telugu
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left: 80px;" colspan="2"><input type="checkbox" name="declaration">Hereby I declare all
+                the given details are true
+            </td>
+        </tr>
+        <td colspan="2">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            Log in to <a href="https://ethnus.com" target="_blank">Ethnus</a> website</td>
+        <tr>
+            <td></td>
+            <td>
+                <button style="background-color: red; color: white; border-radius: 10px;"
+                    onclick="validateForm()"><b>&#160;&#160;Register&#160;&#160;</b></button>
+
+            </td>
+        </tr>
+    </table>
+    <br>
+</body>
+
+</html>
